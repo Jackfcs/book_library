@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <link href="css/style.css" rel="stylesheet">
+  
+</head>
+
+<body>
+  <h1>
+    Your Book Case
+  </h1>
+
+    <div id="bookcase"></div>
+    <button id="addBook">New Book</button>
+    
+  <div id="form" class="form">
+    <button data-close-button class="close-button">&times;</button>
+    <form class="form-content">
+      <label for="bTitle">Title:</label>
+      <input type="text" id="bTitle" name="bTitle">
+      <label for="bAuthor">Author:</label>
+      <input type="text" id="bAuthor" name="bAuthor">
+      <label for="bPages">Number of Pages:</label>
+      <input type="text" id="bPages" name="bPages">
+      <p>Have you read the book?</p>
+      <input type="radio" id="haveRead" name="haveRead" value="yes">
+      <label for="yes">Yes</label>
+      <input type="radio" id="haveRead" name="haveRead" value="no">
+      <label for="no">No</label>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+  <div id="background"></div>
+</body>
+
+<script src="js/script.js"></script>
+
+</html>
