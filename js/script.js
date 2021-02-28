@@ -11,18 +11,13 @@ function Book(title, author, pages, haveread) {
 }
 
 //Creating book objects using constructor
-const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkein', '295 pages', false)
-
-const chubbyHannah = new Book('Chubby Hannah', 'The Real Hannah Paget', '7 Pages', true)
-
-const northernLights = new Book('Northern Lights', 'Phil', '734 Pages', true)
-
-console.log(chubbyHannah.info())
+//const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkein', '295 pages', true)
+//const theHabbit = new Book('The Hobbit', 'J.R.R. Tolkein', '295 pages', true)
 
 
 
 //Books in array
-let myLibrary = [theHobbit, northernLights, chubbyHannah];
+let myLibrary = [];
 
 //Selectors
 const bookCase = document.querySelector('#bookcase');
@@ -32,22 +27,6 @@ const formBG = document.querySelector('#background');
 const formContainer = document.querySelector('#form');
 
 
-//do stuff here
-function addBookToLibrary() {
-
-}
-
-addBookToLibrary()
-
-//Display myLibrary on page
-function displayBooks() {
-  for (let i = 0; i < myLibrary.length; i++) {
-    let bookPlate = document.createElement('div');
-    bookCase.appendChild(bookPlate).setAttribute('id', 'bookPlates')
-    bookPlate.textContent += myLibrary[i].title;
-  }
-}
-
 //Open Form
 newBookButton.addEventListener('click', () => {
   formContainer.classList.add('active')
@@ -55,36 +34,22 @@ newBookButton.addEventListener('click', () => {
 })
 
 //Close Form
-formClose.addEventListener('click', () => {
-  formContainer.classList.remove('active')
-  formBG.classList.remove('active')
-})
+formClose.addEventListener('click', closeForm)
 
-formBG.addEventListener('click', () => {
+
+formBG.addEventListener('click', closeForm)
+
+
+function closeForm() {
   formContainer.classList.remove('active')
   formBG.classList.remove('active')
-})
+}
 
 //Returning form values
-const radioVal = document.getElementsByName('haveRead');
-function haveRead() {
-  if (radioVal[0].checked) {
-    return true
-  } else if (radioVal[1].checked) {
-    return false
-  }
-}
-// TO DO!!! Check how bTitle is functioning. Try the below function for other values
-function bTitle() {
-  formContainer.addEventListener('submit', () => {
-    return document.getElementById('bAuthor').value;
-  })
-}
-console.log('title is ' + bTitle())
 
-// function bTitle(){
-//   return document.querySelector('bTitle').value;
-// }
+function bTitle() {
+  return document.getElementById('bTitle').value;
+}
 
 function bAuthor() {
   return document.getElementById('bAuthor').value;
@@ -94,22 +59,103 @@ function bPages() {
   return document.getElementById('bPages').value;
 }
 
+const radioVal = document.getElementsByName('haveRead');
+function haveRead() {
+  if (radioVal[0].checked) {
+    return true
+  } else if (radioVal[1].checked) {
+    return false
+  }
+}
+
+
+//Create new book and add to library
+function addBookToLibrary() {
+  let aNewBook = new Book(bTitle(), bAuthor(), bPages(), haveRead())
+  myLibrary.push(aNewBook);
+  console.table(myLibrary);
+}
+
+
+function updateDisplay() {
+  bookCase.textContent = '';
+  displayBooks()
+}
+
+//Display myLibrary on page
+function displayBooks() {
+  for (let i = 0; i < myLibrary.length; i++) {
+    const bookPlate = document.createElement('div');
+    const titleDiv = document.createElement('div');
+    const authorDiv = document.createElement('div');
+    const pagesDiv = document.createElement('div');
+    const readDiv = document.createElement('div');
+
+    bookCase.appendChild(bookPlate).setAttribute('class', 'bookPlates delete' + i)
+
+    bookPlate.appendChild(titleDiv);
+    titleDiv.textContent += myLibrary[i].title;
+
+    bookPlate.appendChild(authorDiv);
+    authorDiv.textContent += myLibrary[i].author;
+
+    bookPlate.appendChild(pagesDiv);
+    pagesDiv.textContent += myLibrary[i].pages;
+
+    bookPlate.appendChild(readDiv);
+    const readButton = document.createElement('button');
+    readDiv.appendChild(readButton)
+    if (myLibrary[i].haveread == true) {
+      readButton.innerHTML = 'Have Read'
+    } else if (myLibrary[i].haveread == false) {
+      readButton.innerHTML = 'Not Read'
+    }
+    readButton.addEventListener('click', () => {
+      if (myLibrary[i].haveread === true) {
+        myLibrary[i].haveread = false;
+        readButton.innerHTML = 'Not Read';
+      } else if (myLibrary[i].haveread === false) {
+        myLibrary[i].haveread = true;
+        readButton.HTML = 'Have Read';
+      }
+      updateDisplay();
+    })
+
+
+    const closeButton = document.createElement('button')
+    bookPlate.appendChild(closeButton).innerHTML = "Remove"
+    closeButton.addEventListener('click', () => {
+      myLibrary.splice(i, 1)
+      updateDisplay();
+    })
+  }
+}
+
+///Get Values from form, create book, update display
+
 formContainer.addEventListener('submit', (e) => {
-  //e.preventDefault()
-  
-  let answer2 = bAuthor();
-  console.log(answer2);
-  let answer3 = bPages();
-  console.log(answer3);
-  let answer4 = haveRead();
-  console.log(answer4);
   formContainer.classList.remove('active')
   formBG.classList.remove('active')
-})
+  addBookToLibrary();
+  updateDisplay();
+  document.querySelector('.form-content').reset()
 
-  //   let nextBook = new Book(answer1, answer2, answer3)
-  //   myLibrary.push(nextBook);
-  //   displayBooks();
-  // })
+});
 
-//const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkein', '295 pages', false)
+
+
+
+
+//Display stored data in myLibray
+if (!localStorage.getItem('myLibrary')) {
+  saveData();
+} else {
+  updateDisplay();
+}
+
+//Save myLibrary to storage
+function saveData() {
+  localStorage.setItem('myLibrary', myLibrary);
+}
+
+myLibrary.onchange = saveData;
