@@ -45,6 +45,8 @@ function closeForm() {
   formBG.classList.remove('active')
 }
 
+
+
 //Returning form values
 
 function bTitle() {
@@ -79,7 +81,7 @@ function addBookToLibrary() {
 
 function updateDisplay() {
   bookCase.textContent = '';
-  displayBooks()
+  displayBooks();
 }
 
 //Display myLibrary on page
@@ -119,6 +121,7 @@ function displayBooks() {
         readButton.HTML = 'Have Read';
       }
       updateDisplay();
+      saveLibrary()
     })
 
 
@@ -127,9 +130,12 @@ function displayBooks() {
     closeButton.addEventListener('click', () => {
       myLibrary.splice(i, 1)
       updateDisplay();
+      saveLibrary();
     })
   }
 }
+
+
 
 ///Get Values from form, create book, update display
 
@@ -139,46 +145,21 @@ formContainer.addEventListener('submit', (e) => {
   addBookToLibrary();
   updateDisplay();
   document.querySelector('.form-content').reset()
-
+  saveLibrary();
 });
+updateDisplay()
 
 
 
 
-
-
-
-
-
-// //Display stored data in myLibray
-// if (!localStorage.getItem('myLibrary')) {
-//   updateDisplay();
-// } else {
-//   saveData();
-//   updateDisplay();
-// }
-
-// //Save myLibrary to storage
-// function saveData() {
-//   localStorage.setItem('myLibrary', myLibrary);
-// }
-
-// //myLibrary.onchange = saveData;
-
-
-function setData() {
-  localStorage.setItem(`myLibrary`, JSON.stringify(myLibrary));
+function saveLibrary() {
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
 }
 
-function restore() {
-  if(!localStorage.myLibrary) {
-    updateDisplay();
-  } else {
-    let objects = localStorage.getItem('myLibrary')
-    objects = JSON.parse(objects);
-    myLibrary = objects;
-    updateDisplay()
-  }
-}
 
-restore();
+if (!localStorage.myLibrary) {
+  updateDisplay()
+} else {
+  myLibrary = JSON.parse(window.localStorage.getItem('myLibrary'));
+  updateDisplay()
+}
