@@ -146,16 +146,39 @@ formContainer.addEventListener('submit', (e) => {
 
 
 
-//Display stored data in myLibray
-if (!localStorage.getItem('myLibrary')) {
-  saveData();
-} else {
-  updateDisplay();
+
+
+
+
+// //Display stored data in myLibray
+// if (!localStorage.getItem('myLibrary')) {
+//   updateDisplay();
+// } else {
+//   saveData();
+//   updateDisplay();
+// }
+
+// //Save myLibrary to storage
+// function saveData() {
+//   localStorage.setItem('myLibrary', myLibrary);
+// }
+
+// //myLibrary.onchange = saveData;
+
+
+function setData() {
+  localStorage.setItem(`myLibrary`, JSON.stringify(myLibrary));
 }
 
-//Save myLibrary to storage
-function saveData() {
-  localStorage.setItem('myLibrary', myLibrary);
+function restore() {
+  if(!localStorage.myLibrary) {
+    updateDisplay();
+  } else {
+    let objects = localStorage.getItem('myLibrary')
+    objects = JSON.parse(objects);
+    myLibrary = objects;
+    updateDisplay()
+  }
 }
 
-myLibrary.onchange = saveData;
+restore();
