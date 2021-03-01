@@ -2,11 +2,28 @@
     margin: 0;
     padding: 0;
     border: ;
-    font-family: Arial, sans-serif;
+    font-family: 'Oswald', sans-serif;
   }
   
   body {
     font-size: 14px;
+  }
+
+
+  
+
+  #full-page {
+    background-color: rgb(227 239 255);
+  }
+
+  #title {
+    color: rgb(79 156 255);
+    background-color: rgb(227 239 255);
+    min-height: 50px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
   }
 
   .form {
@@ -18,7 +35,7 @@
     border: 1px solid black;
     border-radius: 5px;
     z-index: 5;
-    background-color: rgba(112, 146, 146, .75);
+    background-color: rgba(79, 156, 255, .75);
     width: 300px;
     max-width: 80%;
   }
@@ -35,6 +52,7 @@
   align-items: center;
 }
 
+
 .close-button {
   cursor: pointer;
   border: none;
@@ -43,6 +61,20 @@
   font-weight: bold;
   font-size: 1.5rem;
   color: black;
+  padding-left: 10px;
+}
+
+.radiobutton2 {
+  margin-right: 4px;
+}
+
+.readthebook {
+  margin-top: 10px;
+}
+
+.confirmbook {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #background {
@@ -62,8 +94,64 @@
   pointer-events: all;
 }
 
+#addbookdiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-bottom: 6px;
+}
+
+#addBook {
+  cursor: pointer;
+  font-weight: 600;
+  border:1px solid rgb(79 156 255);
+  padding: 4px;
+  border-radius: 3px;
+  background-color: rgb(250 195 96);
+  
+}
+
+#bookcase {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: left;
+}
+
 .bookPlates {
-  background-color:rgba(83, 167, 67, 0.5);
-  border: 1px solid black;
-  padding: 2px;
+  background-color:rgb(248 238 221);
+  border: 1px solid rgb(79 156 255);
+  color: rgb(10, 10, 10);
+  padding: 10px;
+  margin: 5px;
+  width: 150px;`
+  min-height: 140px;
+  border-radius: 5px;
+  font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  box-shadow: 5px 5px rgba(1, 1, 1, 0.25);
+  
+
+}
+
+.removebookbutton {
+  margin: 10px;
+  cursor: pointer;
+}
+
+
+.haveread-button {
+  cursor: pointer;
+  border: ;
+  outline: none;
+  background: ;
+  font-weight: ;
+  font-size: ;
+  color: black;
+  padding-left: 3px;
+  padding-right: 3px;
 }

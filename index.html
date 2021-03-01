@@ -1,35 +1,48 @@
 <!DOCTYPE html>
+
+
+
 <html>
 
 <head>
-
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;600&display=swap" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
-  
+
 </head>
 
-<body>
-  <h1>
-    Your Book Case
+<body id="full-page">
+  <h1 id="title">
+    MY LIBRARY
   </h1>
+  <div id="addbookdiv">
+    <button id="addBook">Add Book</button>
+  </div>
+  <div id="bookcase"></div>
 
-    <div id="bookcase"></div>
-    <button id="addBook">New Book</button>
-    
-  <div id="form" class="form" >
+
+  <div id="form" class="form">
     <button data-close-button class="close-button">&times;</button>
     <form class="form-content" onsubmit="return false">
       <label for="bTitle">Title:</label>
-      <input type="text" id="bTitle" name="bTitle">
+      <input type="text" id="bTitle" name="bTitle" required>
       <label for="bAuthor">Author:</label>
-      <input type="text" id="bAuthor" name="bAuthor">
+      <input type="text" id="bAuthor" name="bAuthor" required>
       <label for="bPages">Number of Pages:</label>
-      <input type="text" id="bPages" name="bPages">
-      <p>Have you read the book?</p>
-      <input type="radio" id="haveRead" name="haveRead" value="yes">
-      <label for="yes">Yes</label>
-      <input type="radio" id="haveRead" name="haveRead" value="no">
-      <label for="no">No</label>
-      <input type="submit" value="Submit">
+      <input type="number" id="bPages" name="bPages" required>
+
+      <p class="readthebook">Have you read the book?</p>
+      <div class="radiobutton1">
+        <input type="radio" id="haveRead" name="haveRead" value="yes" checked="true">
+        <label for="yes">Yes</label>
+      </div>
+      <div class="radiobutton2">
+        <input type="radio" id="haveRead" name="haveRead" value="no">
+        <label for="no">No</label>
+      </div>
+
+      <input type="submit" value="Add book" class="confirmbook">
+
     </form>
   </div>
   <div id="background"></div>

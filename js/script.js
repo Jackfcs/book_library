@@ -25,6 +25,8 @@ const newBookButton = document.querySelector('#addBook');
 const formClose = document.querySelector('[data-close-button]');
 const formBG = document.querySelector('#background');
 const formContainer = document.querySelector('#form');
+const bAuthorValue = document.getElementById('bAuthor');
+const bTitleValue = document.getElementById('bTitle');
 
 
 //Open Form
@@ -50,11 +52,11 @@ function closeForm() {
 //Returning form values
 
 function bTitle() {
-  return document.getElementById('bTitle').value;
+  return bTitleValue.value;
 }
 
 function bAuthor() {
-  return document.getElementById('bAuthor').value;
+  return bAuthorValue.value;
 }
 
 function bPages() {
@@ -92,6 +94,7 @@ function displayBooks() {
     const authorDiv = document.createElement('div');
     const pagesDiv = document.createElement('div');
     const readDiv = document.createElement('div');
+    const removeDiv = document.createElement('div');
 
     bookCase.appendChild(bookPlate).setAttribute('class', 'bookPlates delete' + i)
 
@@ -102,13 +105,14 @@ function displayBooks() {
     authorDiv.textContent += myLibrary[i].author;
 
     bookPlate.appendChild(pagesDiv);
-    pagesDiv.textContent += myLibrary[i].pages;
+    pagesDiv.textContent = myLibrary[i].pages + ' pages';
 
     bookPlate.appendChild(readDiv);
     const readButton = document.createElement('button');
-    readDiv.appendChild(readButton)
+    readDiv.appendChild(readButton).setAttribute('class', 'haveread-button')
     if (myLibrary[i].haveread == true) {
       readButton.innerHTML = 'Have Read'
+      readButton.style.background = "rgb(250 195 96)";
     } else if (myLibrary[i].haveread == false) {
       readButton.innerHTML = 'Not Read'
     }
@@ -125,9 +129,10 @@ function displayBooks() {
     })
 
 
-    const closeButton = document.createElement('button')
-    bookPlate.appendChild(closeButton).innerHTML = "Remove"
-    closeButton.addEventListener('click', () => {
+    const removeButton = document.createElement('button')
+    bookPlate.appendChild(removeDiv).setAttribute('class', 'removebookbutton');
+    removeDiv.appendChild(removeButton).innerHTML = "Remove"
+    removeButton.addEventListener('click', () => {
       myLibrary.splice(i, 1)
       updateDisplay();
       saveLibrary();
@@ -146,8 +151,10 @@ formContainer.addEventListener('submit', (e) => {
   updateDisplay();
   document.querySelector('.form-content').reset()
   saveLibrary();
+  
 });
 updateDisplay()
+
 
 
 
