@@ -11,13 +11,13 @@ function Book(title, author, pages, haveread) {
 }
 
 //Creating book objects using constructor
-//const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkein', '295 pages', true)
+const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkein', '295 pages', true)
 //const theHabbit = new Book('The Hobbit', 'J.R.R. Tolkein', '295 pages', true)
 
 
 
 //Books in array
-let myLibrary = [];
+let myLibrary = [theHobbit];
 
 //Selectors
 const bookCase = document.querySelector('#bookcase');
@@ -27,6 +27,7 @@ const formBG = document.querySelector('#background');
 const formContainer = document.querySelector('#form');
 const bAuthorValue = document.getElementById('bAuthor');
 const bTitleValue = document.getElementById('bTitle');
+const bPagesValue = document.getElementById('bPages');
 
 
 //Open Form
@@ -60,7 +61,7 @@ function bAuthor() {
 }
 
 function bPages() {
-  return document.getElementById('bPages').value;
+  return bPagesValue.value;
 }
 
 const radioVal = document.getElementsByName('haveRead');
@@ -77,7 +78,6 @@ function haveRead() {
 function addBookToLibrary() {
   let aNewBook = new Book(bTitle(), bAuthor(), bPages(), haveRead())
   myLibrary.push(aNewBook);
-  console.table(myLibrary);
 }
 
 
